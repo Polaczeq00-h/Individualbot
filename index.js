@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import fs from 'fs';
+import pkg from './package.json' assert { type: 'json' };
+const BOT_VERSION = pkg.version;
 import axios from 'axios';
 import QRCode from 'qrcode';
 import { 
@@ -14,6 +16,7 @@ import {
     ButtonStyle,
     ActionRowBuilder
 } from 'discord.js';
+
 
 // ------------------- KLIENT -------------------
 
@@ -86,6 +89,13 @@ client.once('ready', async () => {
 // ------------------- LISTA KOMEND -------------------
 
 const commands = [
+
+    new SlashCommandBuilder()
+    .setName('wersja')
+    .setDescription('Pokazuje wersję bota')
+    .setDMPermission(true),
+
+
     new SlashCommandBuilder().setName('jiggle-physics')
         .setDescription('Jiggle hysics dla obrazka')
         .addAttachmentOption(o => o.setName('obrazek').setDescription('Obrazek do przetworzenia').setRequired(true)),
@@ -227,6 +237,12 @@ client.on('interactionCreate', async i => {
         const randomFrom = arr => arr[Math.floor(Math.random() * arr.length)];
         const latency = Date.now() - i.createdTimestamp;
         //obsluga komend
+
+    if (name === 'wersja') {
+        return i.reply(`🤖 Wersja bota: **${BOT_VERSION}**`);
+    }
+
+
         if (name === 'jiggle-physics') {
         return i.reply('Jiggle physics jest niedostępne, kurwa! daj devowi czas na ogarnięcie tej jebanej funkcji!');
     }
@@ -414,15 +430,7 @@ client.on('interactionCreate', async i => {
         // RZUT MONETĄ
         if (name === 'rzutmoneta') {
             const wynik = Math.random() > 0.5 ? 'Orzeł 🦅' : 'Reszka 💲';
-            const teksty = [
-                `<@${i.user.id}> rzucił monetą, wynik: **${wynik}**!`,
-                `<@${i.user.id}> zrobił rzut monetą, wyszło: **${wynik}**!`,
-                `<@${i.user.id}> rzucił monetą, wypadło: **${wynik}**!`,
-                `<@${i.user.id}> zrobił rzut monetą, rezultat: **${wynik}**!`,
-                `<@${i.user.id}> rzucił monetą, wynik to: **${wynik}**!`,
-                `<@${i.user.id}> zrobił rzut monetą, wyszło: **${wynik}**!`
-            ];
-            return i.reply(randomFrom(teksty));
+            return i.reply(`<@${i.user.id}> rzucił monetą, kurwa...\n**${wynik}**`);
         }
         // RZUT KOSTKĄ
         if (name === 'kostka') {
