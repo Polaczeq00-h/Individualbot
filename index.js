@@ -216,17 +216,16 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 const tictacGames = new Map();
 
 client.on('interactionCreate', async i => {
-    // Obsługa slash komend
-    if (name === 'jiggle-physics') {
-        return i.reply('Jiggle physics jest niedostępne, kurwa! daj devowi czas na ogarnięcie tej jebanej funkcji!');
-    }
     if (i.isChatInputCommand()) {
         const name = i.commandName;
         const user = i.options?.getUser('kto');
         const targetUser = user || i.user;
         const randomFrom = arr => arr[Math.floor(Math.random() * arr.length)];
         const latency = Date.now() - i.createdTimestamp;
-
+        //obsluga komend
+        if (name === 'jiggle-physics') {
+        return i.reply('Jiggle physics jest niedostępne, kurwa! daj devowi czas na ogarnięcie tej jebanej funkcji!');
+    }
         if (name === 'kolkokrzyzyk') {
             const opponent = i.options.getUser('przeciwnik');
             
