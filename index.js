@@ -28,7 +28,11 @@ const client = new Client({
 
 // ------------------- GITHUB COMMIT CHECK -------------------
 
-client.once('clientReady', async (c) => {
+client.once('ready', async () => {
+    console.log(`✅ Zalogowany jako ${client.user.tag}!`);
+    
+});
+
     console.log(`✅ Zalogowany jako ${c.user.tag}!`);
 
     const channel = client.channels.cache.get('1445878372478484540');
@@ -330,7 +334,7 @@ client.on('interactionCreate', async i => {
             ];
             return i.reply(randomFrom(teksty));
         }
-
+        // Wkurwianie
         if (name === 'wkurw') {
             const teksty = [
                 `<@${i.user.id}> wkurwił ${targetUser}, kurwa!`,
@@ -342,7 +346,7 @@ client.on('interactionCreate', async i => {
             ];
             return i.reply(randomFrom(teksty));
         }
-
+        // LOS
         if (name === 'los') {
             const teksty = [
                 `<@${i.user.id}>, los cię dzisiaj kopie w dupę!`,
@@ -354,11 +358,11 @@ client.on('interactionCreate', async i => {
             ];
             return i.reply(randomFrom(teksty));
         }
-
+        // LIŚĆ
         if (name === 'lisc') {
             return i.reply(`<@${i.user.id}> spierdolił liścia ${targetUser}, kurwa!`);
         }
-
+        //LOVE
         if (name === 'love') {
             const teksty = [
                 `${targetUser || i.user} jesteś piękny jak jebany stacktrace!`,
@@ -370,25 +374,57 @@ client.on('interactionCreate', async i => {
             ];
             return i.reply(randomFrom(teksty));
         }
-
-        if (name === 'rozkurw') {
-            return i.reply('Rozkurw jebany wszędzie!');
+        // ROZKURW
+        if (name === 'beka') {
+            const teksty = [
+                `<@${i.user.id}> zrobił taką bekę, że wszyscy umarli ze śmiechu!`,
+                `<@${i.user.id}> rozkurwił sytuację do tego stopnia, że wszyscy płaczą ze śmiechu!`,
+                `<@${i.user.id}> zrobił taką bekę, że nawet boty się śmieją!`,
+                `<@${i.user.id}> rozkurwił sytuację tak bardzo, że wszyscy mają skurwysyńskie bóle brzucha ze śmiechu!`,
+                `<@${i.user.id}> zrobił taką bekę, że wszyscy mają skurwysyńskie zakwasy od śmiechu!`,
+                `<@${i.user.id}> rozkurwił sytuację do tego stopnia, że wszyscy mają skurwysyńskie skurcze od śmiechu!`
+            ];
+            return i.reply(randomFrom(teksty));
         }
-
+        // IMPREZA
         if (name === 'impreza') {
-            return i.reply('Impreza w toku, kurwa!');
+            const teksty = [
+                `<@${i.user.id}> rozpoczął imprezę, kurwa!`,
+                `<@${i.user.id}> zaczyna imprezę, wszyscy na parkiet!`,
+                `<@${i.user.id}> odpala imprezę, czas na melanż!`,
+                `<@${i.user.id}> rozpoczyna imprezę, niech żyje zabawa!`,
+                `<@${i.user.id}> zaczyna imprezę, niech muzyka gra!`,
+                `<@${i.user.id}> odpala imprezę, czas na szaleństwo!`
+            ];
+            return i.reply(randomFrom(teksty));
         }
-
+        // TORCIK
         if (name === 'torcik') {
-            return i.reply(`🎂 <@${i.user.id}> dorzuca torcik ${targetUser}, zajadaj, kurwa!`);
+           const teksty = [
+                `<@${i.user.id}> dał ${targetUser} torcik, kurwa!`,
+                `<@${i.user.id}> poczęstował ${targetUser} torcikiem, spadaj!`,
+                `<@${i.user.id}> wręczył ${targetUser} torcik, kurwa!`,
+                `<@${i.user.id}> ofiarował ${targetUser} torcik, spadaj!`,
+                `<@${i.user.id}> podarował ${targetUser} torcik, kurwa!`,
+                `<@${i.user.id}> przekazał ${targetUser} torcik, spadaj!`
+            ];
+            return i.reply(randomFrom(teksty));
         }
 
-        // GRY I ZABAWY
+        // RZUT MONETĄ
         if (name === 'rzutmoneta') {
-            const wynik = Math.random() > 0.5 ? 'Orzeł 🦅' : 'Reszka 🪙';
-            return i.reply(`<@${i.user.id}> rzucił monetą, kurwa...\n**${wynik}**`);
+            const wynik = Math.random() > 0.5 ? 'Orzeł 🦅' : 'Reszka 💲';
+            const teksty = [
+                `<@${i.user.id}> rzucił monetą, wynik: **${wynik}**!`,
+                `<@${i.user.id}> zrobił rzut monetą, wyszło: **${wynik}**!`,
+                `<@${i.user.id}> rzucił monetą, wypadło: **${wynik}**!`,
+                `<@${i.user.id}> zrobił rzut monetą, rezultat: **${wynik}**!`,
+                `<@${i.user.id}> rzucił monetą, wynik to: **${wynik}**!`,
+                `<@${i.user.id}> zrobił rzut monetą, wyszło: **${wynik}**!`
+            ];
+            return i.reply(randomFrom(teksty));
         }
-
+        // RZUT KOSTKĄ
         if (name === 'kostka') {
             const sciany = i.options?.getInteger('sciany') || 6;
             if (sciany < 2 || sciany > 100) {
@@ -397,7 +433,7 @@ client.on('interactionCreate', async i => {
             const wynik = Math.floor(Math.random() * sciany) + 1;
             return i.reply(`🎲 <@${i.user.id}> rzucił kostką d${sciany}, kurwa...\n**Wynik: ${wynik}**`);
         }
-
+        // PAPIER KAMIEŃ NOŻYCE
         if (name === 'papierokamiennozaniec') {
     const opcje = ['Papier 📄', 'Kamień 🪨', 'Nożyce ✂️'];
 
@@ -413,7 +449,7 @@ client.on('interactionCreate', async i => {
         components: [row]
     });
 }
-
+        // QUIZ
         if (name === 'quiz') {
             const quizzes = [
                 { q: 'Ile jest kontinentów?', a: 'siedem', wrongAnswers: ['osiem', 'sześć'] },
@@ -424,6 +460,13 @@ client.on('interactionCreate', async i => {
             
             const quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
             const answers = [quiz.a, ...quiz.wrongAnswers].sort(() => Math.random() - 0.5);
+            const buttons = answers.map((ans, i) => 
+            
+                new ButtonBuilder()
+                .setCustomId(`quiz_${i}`)
+                .setLabel(ans)
+                .setStyle(ButtonStyle.Primary)
+);
 
             const row = new ActionRowBuilder().addComponents(buttons);
             
@@ -432,7 +475,7 @@ client.on('interactionCreate', async i => {
                 components: [row]
             });
         }
-
+        // KULKA 8
         if (name === '8kul') {
             const odpowiedzi = [
                 'Tak 👍',
