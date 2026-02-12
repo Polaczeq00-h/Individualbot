@@ -33,16 +33,13 @@ const client = new Client({
 
 client.once('ready', async () => {
     console.log(`✅ Zalogowany jako ${client.user.tag}!`);
-    
-});
-
-    console.log(`✅ Zalogowany jako ${c.user.tag}!`);
-
     const channel = client.channels.cache.get('1445878372478484540');
     if (!channel) {
         console.log('⚠️ Kanał do powiadomień o commitach nie znaleziony.');
         return;
     }
+    
+    
 
     try {
         const owner = process.env.GITHUB_OWNER || 'Polaczeq00-h';
@@ -85,6 +82,7 @@ client.once('ready', async () => {
         console.error('❌ Błąd pobierania commita:', err.message);
     }
 });
+
 
 // ------------------- LISTA KOMEND -------------------
 
